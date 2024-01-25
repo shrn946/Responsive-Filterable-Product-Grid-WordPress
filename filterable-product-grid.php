@@ -25,6 +25,11 @@ add_action('wp_enqueue_scripts', 'filterable_product_grid_enqueue_scripts_styles
 
 
 function custom_product_grid_shortcode($atts) {
+    // Check if we are in the Elementor editor
+    if (\Elementor\Plugin::instance()->editor->is_edit_mode()) {
+        return ''; // Return an empty string to hide the shortcode in Elementor editor
+    }
+
     ob_start(); // Start output buffering
 
     // Shortcode attributes
@@ -123,11 +128,12 @@ function custom_product_grid_shortcode($atts) {
 add_shortcode('custom_product_grid', 'custom_product_grid_shortcode');
 
 
+
 // Function to display the settings page content for the Free Product Carousel Shortcodes
 function display_free_product_carousel_shortcodes() {
     ?>
     <div class="wrap">
-        <h1>Filterable Product Grid Shortcodes</h1>
+        <h1>Filterable Product Grid Shortcode</h1>
         
         <p>Welcome to the Filterable Product Grid plugin settings page.</p>
         <h2>How to Use Shortcode</h2>
